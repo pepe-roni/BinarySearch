@@ -35,17 +35,39 @@ private Item[] store = {
 public int binarySearch(int catNumToFind)
 {
   int low=0;
-  int high=store.length-1;
-  while(low<=high)
+  int high=store.length;
+  while (low<high)
   {
     int guess=(low+high)/2;
-   if(guess<
+    if (guess<store.length)
+    {
+      if (store[guess].getCatNum() == catNumToFind)
+        return store[guess].getInventory();
+      else if (store[guess].getCatNum()>catNumToFind)
+       high=high-1;
+      else
+        low=low+1;
+    }
   }
   return -1;
 }
+
 public int binarySearch(int catNumToFind, int nLow, int nHigh)
 {
-  //complete this method    
+  int guess=(nLow+nHigh)/2;
+  if (nLow<=nHigh)
+  {
+    if(store[guess].getCatNum() == catNumToFind)
+    {
+      return store[guess].getInventory();
+    }
+    else if(store[guess].getCatNum() > catNumToFind)
+    {
+     return binarySearch(catNumToFind, nLow, guess-1); 
+    }
+    else
+     return binarySearch(catNumToFind,guess+1, nHigh);
+  } 
   return -1;
 }
 public void setup()
@@ -92,7 +114,5 @@ public void draw()
 {
   //empty!
 }
-
-
 
 
